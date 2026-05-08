@@ -1,0 +1,3 @@
+## 2026-05-08 - Centralized Formatting and Component Memoization
+**Learning:** Instantiating `Intl.NumberFormat` and `Intl.DateTimeFormat` inside render loops or frequently called functions is expensive. Centralizing these instances in a utility file improves performance by reusing the same object. Additionally, `React.memo` is effective for leaf components like `StatsCard` and `CampaignTable` that receive stable props in this dashboard context.
+**Action:** Always prefer using pre-instantiated formatters from `src/utils/formatters.js` instead of calling `.toLocaleString()` or `.toLocaleDateString()` directly in components.
