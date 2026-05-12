@@ -1,6 +1,12 @@
+import { memo } from 'react';
 import { TrendingUp, TrendingDown } from 'lucide-react';
 
-const StatsCard = ({ title, value, icon: Icon, trend, trendValue, color }) => {
+/**
+ * StatsCard component displays a single metric with an icon and optional trend.
+ * Wrapped in memo to prevent unnecessary re-renders when parent state changes
+ * but this card's props remain the same.
+ */
+const StatsCard = memo(({ title, value, icon: Icon, trend, trendValue, color }) => {
   return (
     <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
       <div className="flex items-center justify-between mb-4">
@@ -20,6 +26,8 @@ const StatsCard = ({ title, value, icon: Icon, trend, trendValue, color }) => {
       </div>
     </div>
   );
-};
+});
+
+StatsCard.displayName = 'StatsCard';
 
 export default StatsCard;
