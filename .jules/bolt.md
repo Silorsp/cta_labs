@@ -1,0 +1,3 @@
+## 2026-05-24 - Centralized Formatting and Component Memoization
+**Learning:** Repeatedly instantiating `Intl.NumberFormat` and `Intl.DateTimeFormat` (via `.toLocaleString()` or similar) is a significant bottleneck in React rendering, especially in charts and large tables. Pre-instantiating these formatters once can be up to 60x faster. Additionally, wrapping leaf components that receive stable props in `React.memo` prevents redundant re-renders in data-heavy dashboards.
+**Action:** Always check for repeated formatting calls in render loops and centralize them in a utility file. Evaluate leaf components for `React.memo` when they are part of a dashboard with frequently updated parent state.
