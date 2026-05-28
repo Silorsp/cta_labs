@@ -1,0 +1,3 @@
+## 2025-05-15 - [Intl Formatter Reuse]
+**Learning:** Pre-instantiating and reusing `Intl.NumberFormat` and `Intl.DateTimeFormat` instances is significantly faster (~60x in this environment) than calling `.toLocaleString()` or `.toLocaleDateString()`. The latter creates new instances or performs expensive locale lookups under the hood on every call, which is particularly impactful when used in render loops or frequently updated components like charts and tables.
+**Action:** Always centralize and reuse `Intl` formatters in a utility file instead of calling formatting methods directly on Number or Date objects in React components.
