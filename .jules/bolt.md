@@ -1,0 +1,3 @@
+## 2025-05-14 - Pre-instantiating Intl formatters for localized data
+**Learning:** Calling `.toLocaleString()` or `.toLocaleDateString()` repeatedly in a React application (especially within render loops, charts, or tables) is expensive because it re-initializes the `Intl` localization engine every time. Pre-instantiating `Intl.NumberFormat` and `Intl.DateTimeFormat` is significantly faster (~6-60x depending on the environment and complexity).
+**Action:** Centralize `Intl` formatters in a utility file (e.g., `src/utils/formatters.js`) and reuse them across the application to improve rendering performance and consistency.
