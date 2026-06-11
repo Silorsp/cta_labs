@@ -1,3 +1,5 @@
+import { currencyFormatter, numberFormatter } from '../utils/formatters';
+
 const CampaignTable = ({ campaigns }) => {
   return (
     <div className="overflow-x-auto">
@@ -33,9 +35,10 @@ const CampaignTable = ({ campaigns }) => {
                 </span>
               </td>
               <td className="py-4 px-4 text-right font-medium">
-                R$ {campaign.spend.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
+                {/* Use pre-instantiated formatter for better performance */}
+                R$ {currencyFormatter.format(campaign.spend)}
               </td>
-              <td className="py-4 px-4 text-right">{campaign.conversions}</td>
+              <td className="py-4 px-4 text-right">{numberFormatter.format(campaign.conversions)}</td>
               <td className="py-4 px-4 text-right font-semibold text-indigo-600">{campaign.roas}x</td>
               <td className="py-4 px-4 text-right">{campaign.ctr}%</td>
             </tr>
