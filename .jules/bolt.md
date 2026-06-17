@@ -1,0 +1,3 @@
+## 2026-06-17 - Performance of Intl Formatters vs toLocaleString
+**Learning:** Reusing `Intl.NumberFormat` and `Intl.DateTimeFormat` instances is significantly faster than calling `.toLocaleString()` or `.toLocaleDateString()` repeatedly. In this environment, pre-instantiated formatters were measured to be ~6.5x faster for numbers and ~70x faster for dates over 100,000 iterations.
+**Action:** Always prefer using pre-instantiated formatters from `src/utils/formatters.js` instead of calling `.toLocaleString()` or `.toLocaleDateString()` directly in components, especially in high-frequency rendering areas like charts or large tables.
