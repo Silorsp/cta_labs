@@ -1,4 +1,11 @@
-const CampaignTable = ({ campaigns }) => {
+import React from 'react';
+import { currencyFormatter } from '../utils/formatters';
+
+/**
+ * CampaignTable component memoized to prevent unnecessary re-renders.
+ * Uses pre-instantiated currencyFormatter for better performance.
+ */
+const CampaignTable = React.memo(({ campaigns }) => {
   return (
     <div className="overflow-x-auto">
       <table className="w-full text-left border-collapse">
@@ -33,7 +40,7 @@ const CampaignTable = ({ campaigns }) => {
                 </span>
               </td>
               <td className="py-4 px-4 text-right font-medium">
-                R$ {campaign.spend.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
+                R$ {currencyFormatter.format(campaign.spend)}
               </td>
               <td className="py-4 px-4 text-right">{campaign.conversions}</td>
               <td className="py-4 px-4 text-right font-semibold text-indigo-600">{campaign.roas}x</td>
@@ -44,6 +51,8 @@ const CampaignTable = ({ campaigns }) => {
       </table>
     </div>
   );
-};
+});
+
+CampaignTable.displayName = 'CampaignTable';
 
 export default CampaignTable;

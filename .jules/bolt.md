@@ -1,0 +1,3 @@
+## 2025-05-14 - Pre-instantiated Intl Formatters and React.memo()
+**Learning:** Pre-instantiating `Intl` formatters (NumberFormat, DateTimeFormat) is significantly faster than calling `.toLocaleString()` or `.toLocaleDateString()` repeatedly, especially in high-frequency paths like Recharts formatters or large table render loops. Combining this with `React.memo()` for presentational components prevents redundant re-renders and computation.
+**Action:** Always centralize and reuse `Intl` formatter instances for common locales and options across the application. Use `React.memo()` on leaf components that receive stable props.
