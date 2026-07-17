@@ -1,0 +1,3 @@
+## 2025-07-17 - Pre-instantiated Intl Formatters vs Inline Localization Calls
+**Learning:** Calling `.toLocaleString()` or `.toLocaleDateString()` with options inside hot code paths (such as React render loops or Recharts chart tick formatters) introduces a massive overhead (50x-60x slower) because the browser must parse and construct locale options and initialize a new `Intl` instance on every single execution.
+**Action:** Always extract internationalization formatting configurations into static, pre-instantiated formatters (like `Intl.NumberFormat` and `Intl.DateTimeFormat`) in a centralized module (e.g. `src/utils/formatters.js`) and reuse them across all components.
