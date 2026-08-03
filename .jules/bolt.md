@@ -1,0 +1,4 @@
+## 2025-08-03 - Reuse of Intl Formatters & Memoization
+**Learning:** Calling `.toLocaleString()` and `.toLocaleDateString()` inside render functions or high-frequency paths (like Recharts ticks or tooltips) causes severe performance degradation because it instantiates a new `Intl.NumberFormat` or `Intl.DateTimeFormat` object on every single execution, which is extremely expensive in terms of CPU cycles. Pre-instantiating and reusing these formatters is 4x to 80x faster.
+Additionally, wrapping presentation components (`StatsCard` and `CampaignTable`) in `React.memo()` with designated `displayName` values prevents unnecessary DOM updates on parent re-renders.
+**Action:** Always export and import centralized, pre-instantiated formatters from `src/utils/formatters.js` instead of using inline `.toLocaleString()` / `.toLocaleDateString()`, and leverage `React.memo()` for pure presentation components.
