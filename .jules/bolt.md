@@ -1,0 +1,3 @@
+## 2025-08-11 - Pre-instantiated Intl Formatters and Component Memoization
+**Learning:** Repetitive inline instantiation of `Intl.NumberFormat` and `Intl.DateTimeFormat` (via `.toLocaleString()` or `.toLocaleDateString()`) in rendering hot-paths or loops (such as Recharts tooltips/formatters and table row mapping) generates significant CPU overhead and garbage collection. Grouping presentational components under React.memo() along with custom displayName guarantees minimum re-render cycles and maximum DevTools visibility.
+**Action:** Always extract and pre-instantiate Intl formatters into a centralized utility like `src/utils/formatters.js`, and memoize presentational elements handling tabular or card data.
