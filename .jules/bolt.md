@@ -1,0 +1,3 @@
+## 2025-03-05 - Intl Formatter Micro-optimization Performance Win
+**Learning:** Pre-instantiating Intl.DateTimeFormat and Intl.NumberFormat formatters once is roughly ~50x to ~70x faster than calling inline `.toLocaleString()` or `.toLocaleDateString()` with formatting options on every render or map loop execution. This is because creating new Intl formatter instances is an expensive native-bound operation.
+**Action:** Always extract and centralize Intl.DateTimeFormat and Intl.NumberFormat instances into a shared utility file (e.g. `src/utils/formatters.js`) instead of calling locale methods inline, particularly inside maps, loops, and Recharts tick/tooltip formatters.
