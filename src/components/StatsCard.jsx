@@ -1,6 +1,8 @@
 import { TrendingUp, TrendingDown } from 'lucide-react';
+import React from 'react';
 
-const StatsCard = ({ title, value, icon: Icon, trend, trendValue, color }) => {
+// Use React.memo to prevent unnecessary re-renders when parent component re-renders.
+const StatsCard = React.memo(({ title, value, icon: Icon, trend, trendValue, color }) => {
   return (
     <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
       <div className="flex items-center justify-between mb-4">
@@ -20,6 +22,8 @@ const StatsCard = ({ title, value, icon: Icon, trend, trendValue, color }) => {
       </div>
     </div>
   );
-};
+});
+
+StatsCard.displayName = 'StatsCard';
 
 export default StatsCard;
