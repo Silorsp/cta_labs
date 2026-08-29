@@ -15,6 +15,7 @@ import {
 import StatsCard from './components/StatsCard';
 import CampaignTable from './components/CampaignTable';
 import { summaryData, dailyData, platformData, campaigns } from './mockData';
+import { numberFormatter, dateFormatter } from './utils/formatters';
 
 const COLORS = ['#3b82f6', '#f97316', '#000000'];
 
@@ -81,9 +82,10 @@ function App() {
 
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          {/* Use pre-instantiated formatter for better performance */}
           <StatsCard
             title="Investimento Total"
-            value={`R$ ${summaryData.totalSpend.toLocaleString('pt-BR')}`}
+            value={`R$ ${numberFormatter.format(summaryData.totalSpend)}`}
             icon={DollarSign}
             trend="up"
             trendValue="12.5%"
@@ -142,15 +144,13 @@ function App() {
                     </linearGradient>
                   </defs>
                   <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
+                  {/* Use pre-instantiated dateFormatter to avoid expensive inline options re-parsing */}
                   <XAxis
                     dataKey="date"
                     axisLine={false}
                     tickLine={false}
                     tick={{fill: '#64748b', fontSize: 12}}
-                    tickFormatter={(str) => {
-                      const date = new Date(str);
-                      return date.toLocaleDateString('pt-BR', { day: 'numeric', month: 'short' });
-                    }}
+                    tickFormatter={(str) => dateFormatter.format(new Date(str))}
                   />
                   <YAxis axisLine={false} tickLine={false} tick={{fill: '#64748b', fontSize: 12}} />
                   <Tooltip
@@ -196,7 +196,7 @@ function App() {
                       <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                     ))}
                   </Pie>
-                  <Tooltip formatter={(value) => `R$ ${value.toLocaleString('pt-BR')}`} />
+                  <Tooltip formatter={(value) => `R$ ${numberFormatter.format(value)}`} />
                 </PieChart>
               </ResponsiveContainer>
             </div>
@@ -207,7 +207,8 @@ function App() {
                     <span className="w-3 h-3 rounded-full" style={{backgroundColor: COLORS[index % COLORS.length]}}></span>
                     {item.name}
                   </div>
-                  <span className="text-sm font-bold">R$ {item.value.toLocaleString('pt-BR')}</span>
+                  {/* Use pre-instantiated numberFormatter */}
+                  <span className="text-sm font-bold">R$ {numberFormatter.format(item.value)}</span>
                 </div>
               ))}
             </div>
