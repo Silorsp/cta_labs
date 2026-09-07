@@ -1,0 +1,3 @@
+## 2026-09-07 - Pre-instantiating Intl formatters in high-frequency React & Recharts render loops
+**Learning:** Inline calls to `.toLocaleString()` and `.toLocaleDateString()` construct new `Intl` formatter instances on every frame and render pass. In Recharts components like `XAxis` `tickFormatter` or `Tooltip` formatters, this can degrade performance by ~50x-70x compared to pre-instantiated `Intl.NumberFormat` and `Intl.DateTimeFormat` instances.
+**Action:** Always extract `Intl` formatters into a shared module (`src/utils/formatters.js`) and reuse pre-instantiated formatter singletons in presentational components and chart formatters.
