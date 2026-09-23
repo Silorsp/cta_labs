@@ -1,6 +1,8 @@
+import { memo } from 'react';
 import { TrendingUp, TrendingDown } from 'lucide-react';
 
-const StatsCard = ({ title, value, icon: Icon, trend, trendValue, color }) => {
+// Wrap presentational component in React.memo to avoid unnecessary re-renders
+const StatsCard = memo(({ title, value, icon: Icon, trend, trendValue, color }) => {
   return (
     <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
       <div className="flex items-center justify-between mb-4">
@@ -20,6 +22,8 @@ const StatsCard = ({ title, value, icon: Icon, trend, trendValue, color }) => {
       </div>
     </div>
   );
-};
+});
+
+StatsCard.displayName = 'StatsCard';
 
 export default StatsCard;
