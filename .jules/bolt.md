@@ -1,0 +1,3 @@
+## 2025-05-18 - Pre-instantiating Intl Formatters for High-Frequency Render Paths
+**Learning:** Calling `Number.prototype.toLocaleString()` or `Date.prototype.toLocaleDateString()` with options inside high-frequency render functions (such as Recharts `XAxis` tick formatters and table row items) causes V8 to repeatedly parse options and construct `Intl` formatter instances on every execution (~60x to ~70x slower than reusing singletons).
+**Action:** Extract locale formatting logic to static `Intl.NumberFormat` and `Intl.DateTimeFormat` singletons in `src/utils/formatters.js` and reuse them across chart components and lists.
