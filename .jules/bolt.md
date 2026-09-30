@@ -1,0 +1,3 @@
+## 2025-05-18 - Pre-instantiating Intl Formatters
+**Learning:** Calling `Number.prototype.toLocaleString()` or `Date.prototype.toLocaleDateString()` directly inside React render methods, chart tick formatters, or list mappings repeatedly instantiates `Intl` objects and parses locale/options, resulting in significant execution overhead (~45x CPU bottleneck compared to pre-instantiated formatters over 100k calls).
+**Action:** Always create and export centralized `Intl.NumberFormat` and `Intl.DateTimeFormat` instances in `src/utils/formatters.js` and import them in components and chart callbacks.
