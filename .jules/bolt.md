@@ -1,0 +1,3 @@
+## 2025-05-18 - Pre-instantiated Intl formatters in Recharts & Table render loops
+**Learning:** Calling `Number.prototype.toLocaleString()` or `Date.prototype.toLocaleDateString()` with options inside Recharts formatters (XAxis tickFormatter, Tooltip formatter) and table iteration loops creates new `Intl.NumberFormat` and `Intl.DateTimeFormat` instances repeatedly on every render/tick, causing significant execution overhead (~50x-70x slower).
+**Action:** Pre-instantiate reusable `Intl.NumberFormat` and `Intl.DateTimeFormat` objects in a centralized utility module (`src/utils/formatters.js`) and import them across components.
