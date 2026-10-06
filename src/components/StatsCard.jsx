@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { TrendingUp, TrendingDown } from 'lucide-react';
 
 const StatsCard = ({ title, value, icon: Icon, trend, trendValue, color }) => {
@@ -22,4 +23,7 @@ const StatsCard = ({ title, value, icon: Icon, trend, trendValue, color }) => {
   );
 };
 
-export default StatsCard;
+const MemoizedStatsCard = memo(StatsCard);
+MemoizedStatsCard.displayName = 'StatsCard';
+
+export default MemoizedStatsCard;
