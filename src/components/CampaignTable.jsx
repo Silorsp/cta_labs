@@ -1,3 +1,5 @@
+import { formatDecimal } from '../utils/formatters';
+
 const CampaignTable = ({ campaigns }) => {
   return (
     <div className="overflow-x-auto">
@@ -33,7 +35,7 @@ const CampaignTable = ({ campaigns }) => {
                 </span>
               </td>
               <td className="py-4 px-4 text-right font-medium">
-                R$ {campaign.spend.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
+                R$ {formatDecimal(campaign.spend)}
               </td>
               <td className="py-4 px-4 text-right">{campaign.conversions}</td>
               <td className="py-4 px-4 text-right font-semibold text-indigo-600">{campaign.roas}x</td>
