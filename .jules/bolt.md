@@ -1,0 +1,3 @@
+## 2025-02-18 - Pre-instantiating Intl formatters for high-frequency rendering paths
+**Learning:** Calling `.toLocaleString()` or `.toLocaleDateString()` with options directly inside render loops and Recharts formatters creates new `Intl` instance allocations per call, causing up to ~55x performance degradation compared to module-scoped `Intl.NumberFormat` / `Intl.DateTimeFormat` instances.
+**Action:** Always extract `Intl.NumberFormat` and `Intl.DateTimeFormat` instances into module-level singletons (such as `src/utils/formatters.js`) and reuse them across chart tick/tooltip formatters and table row renders.
