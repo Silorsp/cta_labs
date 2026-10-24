@@ -1,0 +1,3 @@
+## 2025-02-18 - Pre-instantiating Intl Formatters for High-Frequency Render Loops
+**Learning:** Recharts components (like `XAxis` `tickFormatter` and `Tooltip` `formatter`) call formatting functions repeatedly during pan, zoom, hover, and re-renders. Creating `Intl.NumberFormat` or `Intl.DateTimeFormat` inline inside these formatting functions degrades performance by up to 50x-70x compared to module-level pre-instantiated formatters due to repeated locale parsing and GC pressure.
+**Action:** Always pre-instantiate `Intl` formatters in a dedicated utility module (`src/utils/formatters.js`) and import them directly into chart components and table render loops.
