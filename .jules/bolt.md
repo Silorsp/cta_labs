@@ -1,0 +1,3 @@
+## 2026-11-07 - Pre-instantiated Intl formatters and React.memo on charts and dashboard tables
+**Learning:** Recharts tick/tooltip formatters and table row renders repeatedly instantiate `toLocaleDateString` and `toLocaleString` with locale options, which costs ~50-70x more execution time than module-scoped pre-instantiated `Intl.NumberFormat` and `Intl.DateTimeFormat` instances. Combining this with `React.memo` on display-only components avoids duplicate layout calculations.
+**Action:** Always extract date and currency/number formatters to a shared module using `Intl.*` instances and wrap static or slowly changing presentation components in `React.memo`.
